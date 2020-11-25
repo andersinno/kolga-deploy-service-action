@@ -1,0 +1,28 @@
+name: 'Kolga Deploy Service'
+description: 'This action is used to execute Kolga deploy services step'
+inputs:
+  track:
+    description: 'Track where to deploy eg. review, staging, stable'
+    required: true
+    default: 'review'
+  service:
+    description: 'Name of the service to be deployed'
+    required: true
+    default: 'postgresql'
+  projects:
+    description: 'Comma separated list of projects'
+    required: true
+runs:
+  using: 'docker'
+  image: 'docker://docker.anders.fi/anders/ci-configuration:dev-github-development-production'
+  entrypoint: /app/devops
+  args:
+    - deploy_service
+    - '--track'
+    - ${{ inputs.track }}
+    - '--service'
+    - ${{ inputs.service }}
+    - '--env-var'
+    - 'DATABASE_URL'
+    - '--projects'
+    - ${{ inputs.projects }}
