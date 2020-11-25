@@ -14,7 +14,7 @@ inputs:
     required: true
 runs:
   using: 'docker'
-  image: 'docker://docker.anders.fi/anders/ci-configuration:dev-github-development-production'
+  image: 'docker://ghcr.io/andersinno/kolga:v3'
   entrypoint: /app/devops
   args:
     - deploy_service
